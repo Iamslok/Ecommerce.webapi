@@ -18,6 +18,13 @@ builder.Services.AddDbContext<DemoDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DemoDbContext"), s => s.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
 });
 
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
+
 var app = builder.Build();
 
 
